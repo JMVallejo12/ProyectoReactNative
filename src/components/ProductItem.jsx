@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     textProduct: {
         paddingRight: 5,
         paddingLeft: 5,
+        textAlign: 'center',
     }
 })
 
