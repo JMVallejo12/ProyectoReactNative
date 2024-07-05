@@ -2,25 +2,37 @@ import { View, StyleSheet, Text, Pressable } from "react-native";
 
 function CategoryItem({category, navigation}){
     return(
-        <View style={styles.container}>
+        <View style={styles.superContainer}>
             <Pressable onPress={()=>navigation.navigate('ItemCat', {category})}>
-                <Text style={styles.textCatItem}>{category}</Text>
+                <View style={styles.innerContainer}>
+                    <Text style={styles.textCatItem}>{category}</Text>
+                </View>
+                
             </Pressable>
         </View>
     )
 }
 
 const styles = StyleSheet.create ({
-    container:{
-        margin: 20,
-        borderWidth: 1,
-        borderColor: 'black',
-        height: "40%",
+    superContainer:{
+        marginTop: 20,
+        marginRight: 5,
+        marginLeft: 5,
+        height: "30%",
+        width: 100,
+        justifyContent: 'center',
+        
         
     },
     textCatItem: {
         fontSize: 24,
     },
+    innerContainer:{
+        borderWidth: 1,
+        borderColor: 'black',
+        height: "100%",
+        alignItems: 'center'
+    }
 
 })
 
