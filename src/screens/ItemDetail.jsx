@@ -1,4 +1,5 @@
 import { View, StyleSheet, Text, Image } from "react-native";
+import Counter from "../components/Counter";
 
 function ItemDetail({navigation, route}){
     const {product} = route.params
@@ -12,6 +13,7 @@ function ItemDetail({navigation, route}){
                 <Text style={styles.text}>{product.name}</Text>
                 <Text style={styles.text}>${product.price}</Text>
                 <Text style={styles.text}>{product.desc}</Text>
+                <Counter product={product}/>
             </View>
             
         </View>
