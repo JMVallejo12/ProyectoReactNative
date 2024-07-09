@@ -1,7 +1,10 @@
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, Pressable } from "react-native";
 import Counter from "../components/Counter";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../features/cartSlice";
 
 function ItemDetail({navigation, route}){
+    const dispatch = useDispatch()
     const {product} = route.params
     return(
         <View style={styles.superContainer}>
@@ -13,7 +16,10 @@ function ItemDetail({navigation, route}){
                 <Text style={styles.text}>{product.name}</Text>
                 <Text style={styles.text}>${product.price}</Text>
                 <Text style={styles.text}>{product.desc}</Text>
-                <Counter product={product}/>
+                {/* <Counter product={product}/> */}
+                <Pressable onPress={()=>dispatch(addToCart(product))}>
+                    <Text>Agregar la carrito</Text>
+                </Pressable>
             </View>
             
         </View>

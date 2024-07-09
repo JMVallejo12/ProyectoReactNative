@@ -9,8 +9,8 @@ export const cartSlice = createSlice({
     },
     reducers: {
         addToCart: (state,action)=>{
-            state.value.cart = action.payload
-            console.log(state.value.cart)
+            state.value.cart.push(action.payload)
+            // console.log(state.value.cart)
         }
     },
 })

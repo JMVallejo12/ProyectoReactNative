@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { increment, decrement, incrementByAmount, reset } from '../features/CounterSlice'
@@ -8,6 +8,7 @@ const Counter = (product) => {
 
     const count = useSelector((state)=> state.counter.value)
     const dispatch = useDispatch()
+    const cartList = useSelector((state)=> state.cart.value)
 
     if(count <= 0){
         dispatch(reset())
@@ -15,14 +16,14 @@ const Counter = (product) => {
 
     return (
         <View style={styles.superContainer}>
-        <Pressable onPress={()=> dispatch(decrement())} style={styles.press}>
+        {/* <Pressable onPress={()=> dispatch(decrement())} style={styles.press}>
             <Text style={styles.symbolReducer}></Text>
         </Pressable>
         <Text style={styles.number}>{count}</Text>
         <Pressable onPress={()=> dispatch(increment())} >
             <Text style={styles.symbol}>+</Text>
-        </Pressable>
-        <Pressable onPress={()=>dispatch(addToCart(product))}>
+        </Pressable> */}
+        <Pressable onPress={()=>dispatch(addToCart(product,count))}>
             <Text>Agregar al carrito</Text>
         </Pressable>
         </View>
