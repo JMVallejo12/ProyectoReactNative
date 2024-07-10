@@ -1,20 +1,27 @@
 import { View, StyleSheet, Text, FlatList } from "react-native";
 import Header from "../components/Header";
-import products from '../data/products.json'
+// import products from '../data/products.json'
 import ProductItem from "../components/ProductItem";
+import { useGetProductsByCategoryQuery } from "../services/shopApi";
+import { useEffect, useState } from "react";
 
 function ItemListCategory({navigation, route}){
     
     const {category} = route.params
+    const [products, setProducts] = useState([]);
     
-    const mainFilter = products.filter((product) => product.cat === category)
+    // console.log(category)
+    const {data, isLoading, error} = useGetProductsByCategoryQuery(category)
+    
+    
 
+    
     return(
         <View style={styles.superContainer}>
             <Header title_header={"ItemListCategory"}/>
             <FlatList
                 keyExtractor={(product) => product.id}
-                data={mainFilter}
+                data={products}
                 renderItem={({item})=> <ProductItem product={item} navigation={navigation} route={route}/>}
                 style={styles.flatContainer}
                 // haciendo que los elementos se muestren en columnas
