@@ -8,12 +8,19 @@ import { useEffect, useState } from "react";
 function ItemListCategory({navigation, route}){
     
     const {category} = route.params
-    const [products, setProducts] = useState([]);
     
-    // console.log(category)
     const {data, isLoading, error} = useGetProductsByCategoryQuery(category)
     
-    
+    if(isLoading){
+        return(
+            <View>
+                <Text>
+                    Cargando...
+                </Text>
+            </View>
+        )
+
+    }    
 
     
     return(
@@ -21,7 +28,7 @@ function ItemListCategory({navigation, route}){
             <Header title_header={"ItemListCategory"}/>
             <FlatList
                 keyExtractor={(product) => product.id}
-                data={products}
+                data={data}
                 renderItem={({item})=> <ProductItem product={item} navigation={navigation} route={route}/>}
                 style={styles.flatContainer}
                 // haciendo que los elementos se muestren en columnas
@@ -36,7 +43,6 @@ function ItemListCategory({navigation, route}){
 const styles = StyleSheet.create({
     flatContainer: {
         padding: 10,
-        
     },
     superContainer: {
         flex: 1,
