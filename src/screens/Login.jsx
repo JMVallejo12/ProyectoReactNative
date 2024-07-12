@@ -1,54 +1,79 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Pressable, StyleSheet, Text, TextInput, View, Platform } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../features/userSlice'
+import { useSingInMutation } from '../services/authService'
+
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const [triggerSingIn, result] = useSingInMutation()
 
-  return (
-    // El componente keyboardawarescrollview se utiliza para que  el contenido no se desacomode cuando aparece el teclado
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.scrollView}
-      enableOnAndroid={true}
-      extraHeight={Platform.OS === 'android' ? 150 : 0}
-      enableAutomaticScroll={true}
-    >
-      <View style={styles.superContainer}>
-        <View style={styles.boxContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>INICIAR SESIÓN</Text>
-          </View>
+    useEffect(()=>{
+        if(result.isSuccess){
+          dispatch(
+            setUser({
+              email: result.data.email,
+              idToken: result.data.idToken,
+              localId: result.data.localId,
+            })
+          )
+          console.log("Logueado correctamente")
+        }
+        if(result.error){
+          console.log(result.error)
+        }
+    },[result])
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.text}>Ingresa tu e-mail</Text>
-            <TextInput 
-              style={styles.input}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              value={email}
-              onChangeText={setEmail}
-            />
-            <Text style={styles.text}>Ingresa tu contraseña</Text>
-            <TextInput
-              style={styles.input}
-              secureTextEntry
-              autoCapitalize="none"
-              value={password}
-              onChangeText={setPassword}
-            />
-            <Pressable style={styles.btnContainer}>
-              <Text style={styles.textBtn}>INICIAR SESIÓN</Text>
-            </Pressable>
-            <Pressable style={styles.pressAccount} onPress={() => navigation.navigate('Registro')}>
-              <Text style={styles.textAccount}>Toca aquí si no tienes cuenta</Text>
-            </Pressable>
+    function onSubmit(){
+      triggerSingIn({email,password, returnSecureToken: true})
+    }
+
+    return (
+      // El componente keyboardawarescrollview se utiliza para que  el contenido no se desacomode cuando aparece el teclado
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.scrollView}
+        enableOnAndroid={true}
+        extraHeight={Platform.OS === 'android' ? 150 : 0}
+        enableAutomaticScroll={true}
+      >
+        <View style={styles.superContainer}>
+          <View style={styles.boxContainer}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>INICIAR SESIÓN</Text>
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.text}>Ingresa tu e-mail</Text>
+              <TextInput 
+                style={styles.input}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                value={email}
+                onChangeText={setEmail}
+              />
+              <Text style={styles.text}>Ingresa tu contraseña</Text>
+              <TextInput
+                style={styles.input}
+                secureTextEntry
+                autoCapitalize="none"
+                value={password}
+                onChangeText={setPassword}
+              />
+              <Pressable style={styles.btnContainer} onPress={onSubmit}>
+                <Text style={styles.textBtn}>INICIAR SESIÓN</Text>
+              </Pressable>
+              <Pressable style={styles.pressAccount} onPress={() => navigation.navigate('Registro')}>
+                <Text style={styles.textAccount}>Toca aquí si no tienes cuenta</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
-      </View>
-    </KeyboardAwareScrollView>
-  );
+      </KeyboardAwareScrollView>
+    );
 }
 
 export default Login

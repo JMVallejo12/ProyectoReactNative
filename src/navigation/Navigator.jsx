@@ -3,14 +3,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./StackNavigator";
 import TabNavigator from "./TabNavigator";
 import AuthStackNavigator from "./AuthStackNavigator";
+import { useSelector } from "react-redux";
 
 function Navigator(){
 
+    const {user} = useSelector((state)=> state.auth.value)
+
     return(
         <NavigationContainer>
-            {/* <StackNavigator /> */}
-            {/* <TabNavigator /> */}
-            <AuthStackNavigator />
+            {user ? <TabNavigator /> : <AuthStackNavigator />}
         </NavigationContainer>
     )
 }

@@ -12,8 +12,15 @@ export const authApi = createApi({
                 method: "POST",
                 body: auth
             })
+        }),
+        singIn: builder.mutation({
+            query: (auth) => ({
+                url: `/accounts:signInWithPassword?key=${apiKey}`,
+                method: "POST",
+                body: auth
+            })
         })
     })
 })
 
-export const {useSingUpMutation} = authApi
+export const {useSingUpMutation, useSingInMutation} = authApi
