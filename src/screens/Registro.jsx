@@ -74,10 +74,10 @@ const Registro = ({ navigation }) => {
                 onChangeText={setConfirmPassword}
                 />
                 <Pressable style={styles.btnContainer} onPress={onSubmit}>
-                <Text style={styles.textBtn}>REGISTRARSE</Text>
+                    <Text style={styles.textBtn}>REGISTRARSE</Text>
                 </Pressable>
                 <Pressable style={styles.pressAccount} onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.textAccount}>Toca aquí si ya tienes cuenta</Text>
+                    <Text style={styles.textAccount}>Toca aquí si ya tienes cuenta</Text>
                 </Pressable>
             </View>
             </View>

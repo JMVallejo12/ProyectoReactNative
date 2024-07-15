@@ -2,7 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import imgDefault from '../../assets/default.png'
 
-const MyProfile = () => {
+const MyProfile = ({navigation}) => {
   return (
     <View style={styles.superContainer}>
         <View style={styles.imgContainer}>
@@ -10,7 +10,7 @@ const MyProfile = () => {
                 source={imgDefault}
                 style={styles.img}
             />
-            <Pressable style={styles.btn}>
+            <Pressable style={styles.btn} onPress={()=> navigation.navigate('Image_Selector')}>
                 <Text style={styles.btnText}>Agregar foto de perfil</Text>
             </Pressable>
         </View>
