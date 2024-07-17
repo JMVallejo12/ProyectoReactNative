@@ -9,8 +9,8 @@ function ItemListCategory({navigation, route}){
     
     const {category} = route.params
     
-    const {data, isLoading, error} = useGetProductsByCategoryQuery(category)
-    
+    const {data, isLoading, error} = useGetProductsByCategoryQuery(category.name)
+    console.log(category.name)
     if(isLoading){
         return(
             <View>

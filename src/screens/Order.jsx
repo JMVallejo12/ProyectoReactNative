@@ -1,14 +1,43 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const Order = () => {
-  return (
-    <View>
-      <Text>Order</Text>
-    </View>
-  )
+    const orderList = useSelector((state) => state.order.orderItems)
+    console.log(orderList)
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Order</Text>
+            <FlatList
+                data={orderList}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                    <View style={styles.orderItem}>
+                        <Text>{item.name} - ${item.price} x {item.quantity}</Text>
+                        <Text>Total: ${item.totalPrice}</Text>
+                    </View>
+                )}
+            />
+        </View>
+    )
 }
 
-export default Order
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 16,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 16,
+    },
+    orderItem: {
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: 'black',
+    }
+});
 
-const styles = StyleSheet.create({})
+export default Order;

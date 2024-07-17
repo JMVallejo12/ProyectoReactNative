@@ -1,6 +1,9 @@
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
+import { Dimensions } from "react-native";
 
 function ProductItem({navigation, product, route}){
+    const {height} = Dimensions.get('window')
+    const  containerHeight = height * 0.20
     return(
         <View style={styles.superContainer}>
             <Pressable style={styles.itemContainer} onPress={()=> navigation.navigate('ItemDetail', {product})}>
@@ -20,12 +23,15 @@ const styles = StyleSheet.create({
     superContainer:{
         borderWidth: 1,
         borderColor: 'black',
+        height: 160,
+        margin: 5
     },
     itemContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,
         width: 100,
+        
     },
     imageStyle: {
         width: 90,

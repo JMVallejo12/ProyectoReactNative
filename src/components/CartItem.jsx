@@ -1,47 +1,60 @@
-import { useState } from 'react'
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { useDispatch } from 'react-redux'
+import { addToOrder } from '../features/orderSlice'
 
-const CartItem = ({item}) => {
+const CartItem = ({ item }) => {
+    const dispatch = useDispatch()
     console.log(item)
 
     const [quantity, setQuantity] = useState(0)
 
-    function Add(){
+    function Add() {
         setQuantity(prevQuantity => prevQuantity + 1)
     }
 
-    function Decrement(){
+    function Decrement() {
         if (quantity > 0) {
             setQuantity(prevQuantity => prevQuantity - 1)
         }
     }
 
+    function handleAddToOrder() {
+        dispatch(addToOrder({ name: item.name, price: item.price, quantity }))
+    }
+
     return (
         <View style={styles.superContainer}>
-            <View>
-                <Image
-                    source={{uri: item.img}}
-                    style={styles.imgStlye}
-                />
-            </View>
+            <View style={styles.infoContainer}>
+                <View>
+                    <Image
+                        source={{ uri: item.img }}
+                        style={styles.imgStlye}
+                    />
+                </View>
 
-            <View style={styles.itemDesc}>
-                <Text>{item.name}</Text>
-                <Text>{item.price}</Text>
+                <View style={styles.itemDesc}>
+                    <Text>{item.name}</Text>
+                    <Text>${item.price}</Text>
+                </View>
+
             </View>
 
             <View style={styles.quantityStyle}>
-                <Pressable onPress={()=>Decrement()} style={styles.press}>
+                <Pressable onPress={Decrement} style={styles.press}>
                     <Text style={styles.symbolReducer}></Text>
                 </Pressable>
-                    <Text style={styles.quantityText}>{quantity}</Text>
-                <Pressable  onPress={()=> Add()}>
+                <Text style={styles.quantityText}>{quantity}</Text>
+                <Pressable onPress={Add}>
                     <Text style={styles.symbol}>+</Text>
                 </Pressable>
             </View>
+            
+            <Pressable style={styles.pressOrder} onPress={handleAddToOrder}>
+                <Text style={styles.textPress}>Agregar a la orden</Text>
+            </Pressable>
         </View>
-  )
+    )
 }
 
 const styles = StyleSheet.create({
@@ -50,21 +63,19 @@ const styles = StyleSheet.create({
         borderColor: 'color',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingRight: 10,
-        paddingLeft: 10,
+        paddingRight: 0,
+        paddingLeft: 20,
+        gap: 15
     },
     imgStlye: {
         height: 100,
         width: 100,
     },
-    itemDesc:{
-        borderWidth: 1,
-        borderColor: 'black',
+    itemDesc: {
+        flexDirection: 'colum',
+        marginTop: 5,
     },
     quantityStyle: {
-        // borderWidth: 1,
-        // borderColor: 'black',
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10,
@@ -74,7 +85,7 @@ const styles = StyleSheet.create({
     symbol: {
         fontSize: 40,
     },
-    symbolReducer:{
+    symbolReducer: {
         borderWidth: 1,
         borderColor: 'black',
         width: 14,
@@ -84,10 +95,26 @@ const styles = StyleSheet.create({
     quantityText: {
         fontSize: 24,
     },
-    press: {
-        
+    pressOrder: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: 'black',
+        backgroundColor: 'black',
+        padding: 2,
+        height: 50,
+        width: 100, 
+    },
+    textPress: {
+        textAlign: 'center',
+        color: 'white',
+        flexWrap: 'wrap', 
+    },
+    infoContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 5
     }
+});
 
-})
-
-export default CartItem
+export default CartItem;
