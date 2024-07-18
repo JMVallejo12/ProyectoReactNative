@@ -5,7 +5,6 @@ import { addToOrder } from '../features/orderSlice'
 
 const CartItem = ({ item }) => {
     const dispatch = useDispatch()
-    console.log(item)
 
     const [quantity, setQuantity] = useState(0)
 

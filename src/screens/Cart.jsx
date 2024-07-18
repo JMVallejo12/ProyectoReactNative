@@ -4,7 +4,6 @@ import CartItem from "../components/CartItem";
 
 function Cart({navigation}){
     const cartList = useSelector((state)=> state.cart.value.cart)
-    console.log(cartList)
 
     return(
         <View style={styles.superContainer}>

@@ -17,8 +17,8 @@ function ItemDetail({navigation, route}){
                 <Text style={styles.text}>${product.price}</Text>
                 <Text style={styles.text}>{product.desc}</Text>
                 {/* <Counter product={product}/> */}
-                <Pressable onPress={()=>dispatch(addToCart(product))}>
-                    <Text>Agregar la carrito</Text>
+                <Pressable onPress={()=>dispatch(addToCart(product))} style={styles.press}>
+                    <Text style={styles.textPress}>Agregar la carrito</Text>
                 </Pressable>
             </View>
             
@@ -33,12 +33,11 @@ const styles = StyleSheet.create({
     },
     superContainer: {
         flex: 1,
-        borderWidth: 1,
-        borderColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     container:{
-        borderColor: 'black',
-        borderWidth: 1,
+
         justifyContent: 'center',
         alignItems: 'center',
         gap: 10,
@@ -46,6 +45,13 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 24,
         textAlign: 'center',
+    },
+    press: {
+        backgroundColor: 'black',
+        padding: 10
+    },
+    textPress: {
+        color: 'white'
     }
 
 })

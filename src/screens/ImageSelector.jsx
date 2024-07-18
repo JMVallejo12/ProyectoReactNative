@@ -6,11 +6,11 @@ import { usePostProfileImageMutation } from '../services/shopApi'
 import { useDispatch, useSelector } from 'react-redux'
 
 const ImageSelector = ({ navigation }) => {
-  const [image, setImage] = useState(null)
-  const [triggerPostImage, result] = usePostProfileImageMutation()
-  const dispatch = useDispatch()
-  const { localId } = useSelector((state) => state.auth.value)
-  const [isImageFromCamera, setIsImageFromCamera] = useState(false)
+    const [image, setImage] = useState(null)
+    const [triggerPostImage, result] = usePostProfileImageMutation()
+    const dispatch = useDispatch()
+    const { localId } = useSelector((state) => state.auth.value)
+    const [isImageFromCamera, setIsImageFromCamera] = useState(false)
 
     async function verifyCameraPermission() {
       const {status} = await ImagePicker.requestCameraPermissionsAsync()

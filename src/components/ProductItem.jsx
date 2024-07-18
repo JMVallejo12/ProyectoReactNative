@@ -6,7 +6,7 @@ function ProductItem({navigation, product, route}){
     const  containerHeight = height * 0.20
     return(
         <View style={styles.superContainer}>
-            <Pressable style={styles.itemContainer} onPress={()=> navigation.navigate('ItemDetail', {product})}>
+            <Pressable style={styles.itemContainer} onPress={()=> navigation.navigate('Detalle', {product})}>
                 <Image 
                     source={{uri: product.img}}
                     style={styles.imageStyle}

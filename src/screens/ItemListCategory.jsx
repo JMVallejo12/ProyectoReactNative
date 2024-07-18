@@ -10,10 +10,9 @@ function ItemListCategory({navigation, route}){
     const {category} = route.params
     
     const {data, isLoading, error} = useGetProductsByCategoryQuery(category.name)
-    console.log(category.name)
     if(isLoading){
         return(
-            <View>
+            <View style={styles.loadingContainer}>
                 <Text>
                     Cargando...
                 </Text>
@@ -25,14 +24,13 @@ function ItemListCategory({navigation, route}){
     
     return(
         <View style={styles.superContainer}>
-            <Header title_header={"ItemListCategory"}/>
             <FlatList
                 keyExtractor={(product) => product.id}
                 data={data}
                 renderItem={({item})=> <ProductItem product={item} navigation={navigation} route={route}/>}
                 style={styles.flatContainer}
                 // haciendo que los elementos se muestren en columnas
-                numColumns={3}
+                numColumns={4}
                 columnWrapperStyle={styles.row} 
                 contentContainerStyle={styles.flatContainer}
             />
@@ -42,7 +40,7 @@ function ItemListCategory({navigation, route}){
 
 const styles = StyleSheet.create({
     flatContainer: {
-        padding: 10,
+        padding: 5,
     },
     superContainer: {
         flex: 1,

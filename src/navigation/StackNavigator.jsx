@@ -13,10 +13,10 @@ function StackNavigator(){
           <stack.Screen name='Inicio' component={Home}  options={{
             animation: 'ios',
           }} />
-          <stack.Screen name='ItemCat' component={ItemListCategory} options={{
+          <stack.Screen name='Categoria' component={ItemListCategory} options={{
             animation: 'ios',
           }}/>
-          <stack.Screen name='ItemDetail' component={ItemDetail} options={{
+          <stack.Screen name='Detalle' component={ItemDetail} options={{
             animation: 'ios',
           }}/>
         </stack.Navigator>

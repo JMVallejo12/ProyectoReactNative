@@ -8,7 +8,7 @@ const OrderStackNavigator = () => {
     const stack  = createNativeStackNavigator()
     return (
         <stack.Navigator>
-            <stack.Screen name='OrderScreen' component={Order}/>
+            <stack.Screen name='Tus Ordenes' component={Order}/>
         </stack.Navigator>
   )
 }

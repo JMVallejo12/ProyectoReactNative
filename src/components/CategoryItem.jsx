@@ -10,7 +10,7 @@ function CategoryItem({category, navigation}){
 
     return(
         <View style={[styles.superContainer, {width: containerWidth, height: containerHeight}]}>
-            <Pressable onPress={()=>navigation.navigate('ItemCat', {category})}>
+            <Pressable onPress={()=>navigation.navigate('Categoria', {category})}>
                 <View style={styles.innerContainer}>
                     <Image
                         source={{uri: category.img}}

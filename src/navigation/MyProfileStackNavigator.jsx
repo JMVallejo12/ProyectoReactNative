@@ -9,12 +9,12 @@ const MyProfileStackNavigator = () => {
     const stack = createNativeStackNavigator()
     return (
         <stack.Navigator>
-            <stack.Screen name='My_Profile' component={MyProfile}
+            <stack.Screen name='Mi Perfil' component={MyProfile}
                 options={{
                     animation: 'ios'
                 }}
             />
-            <stack.Screen name='Image_Selector' component={ImageSelector}
+            <stack.Screen name='Selecciona Imagen' component={ImageSelector}
                 options={{
                     animation: 'ios'
                 }}
