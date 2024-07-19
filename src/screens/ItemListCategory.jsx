@@ -13,7 +13,7 @@ function ItemListCategory({navigation, route}){
     if(isLoading){
         return(
             <View style={styles.loadingContainer}>
-                <Text>
+                <Text style={styles.textLoading}>
                     Cargando...
                 </Text>
             </View>
@@ -51,6 +51,15 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         flexWrap: 'wrap'
     },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textLoading: {
+        fontSize: 32,
+        color: 'black'
+    }
 
 })
 
